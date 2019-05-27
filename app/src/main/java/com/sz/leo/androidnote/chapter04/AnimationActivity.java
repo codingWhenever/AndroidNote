@@ -7,7 +7,6 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.media.midi.MidiDeviceInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,14 +14,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.sz.leo.androidnote.R;
 import com.sz.leo.androidnote.chapter03.DensityUtils;
+import com.sz.leo.androidnote.chapter04.recyclerView.GridRecyclerViewActivity;
+import com.sz.leo.androidnote.chapter04.recyclerView.RecyclerViewActivity;
 
 /**
  * @author：leo
@@ -152,5 +151,13 @@ public class AnimationActivity extends AppCompatActivity {
 
     public void animator2(View view) {
         startActivity(new Intent(this, Animation2Activity.class));
+    }
+
+    public void recyclerViewAnimation(View view) {
+        startActivity(new Intent(this, RecyclerViewActivity.class));
+    }
+
+    public void gridViewAnimation(View view) {
+        startActivity(new Intent(this, GridRecyclerViewActivity.class));
     }
 }

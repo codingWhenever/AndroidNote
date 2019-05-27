@@ -97,6 +97,20 @@
             android:layout_margin="20dp"
             android:onClick="animator2"
             android:src="@mipmap/ic_launcher" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:onClick="recyclerViewAnimation"
+            android:text="recyclerViewAnimation" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:onClick="gridViewAnimation"
+            android:text="gridViewAnimation" />
     </LinearLayout>
 
 </ScrollView>

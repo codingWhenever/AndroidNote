@@ -37,6 +37,8 @@
 
         <!--<activity android:name=".chapter04.AnimationActivity"/>-->
         <activity android:name=".chapter04.Animation2Activity" />
+        <activity android:name=".chapter04.recyclerView.RecyclerViewActivity" />
+        <activity android:name=".chapter04.recyclerView.GridRecyclerViewActivity" />
     </application>
 
 </manifest>
