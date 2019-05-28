@@ -20,6 +20,7 @@ import android.widget.ImageView;
 
 import com.sz.leo.androidnote.R;
 import com.sz.leo.androidnote.chapter03.DensityUtils;
+import com.sz.leo.androidnote.chapter04.customView.FailingBallActivity;
 import com.sz.leo.androidnote.chapter04.recyclerView.GridRecyclerViewActivity;
 import com.sz.leo.androidnote.chapter04.recyclerView.RecyclerViewActivity;
 
@@ -106,6 +107,14 @@ public class AnimationActivity extends AppCompatActivity {
         imgAnimDrawable.setImageResource(R.drawable.anim_list);
         AnimationDrawable animationDrawable = (AnimationDrawable) imgAnimDrawable.getDrawable();
         animationDrawable.start();
+
+        findViewById(R.id.iv_launcher).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startActivity(new Intent(AnimationActivity.this, FailingBallActivity.class));
+                return true;
+            }
+        });
     }
 
     public void open(View view) {
