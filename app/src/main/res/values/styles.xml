@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -12,9 +12,40 @@
         <attr name="default_size" format="dimension" />
     </declare-styleable>
     <declare-styleable name="ClockView">
-        <attr name="clock_backgroundColor" format="color"></attr>
-        <attr name="clock_lightColor" format="color"></attr>
+        <attr name="clock_backgroundColor" format="color" />
+        <attr name="clock_lightColor" format="color" />
         <attr name="clock_darkColor" format="color" />
         <attr name="clock_textSize" format="dimension" />
     </declare-styleable>
+
+    <style name="GreenBtnTheme" parent="@android:style/Widget.Holo.Light.Button" tools:targetApi="11">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/common_button_green</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/common_color</item>
+    </style>
+
+    <style name="GrayBtnTheme" parent="@android:style/Widget.Holo.Light.Button" tools:targetApi="11">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/common_button_gray</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/gray_color</item>
+    </style>
+
+    <style name="EditTextTheme" parent="@android:style/Widget.Holo.Light.EditText" tools:targetApi="11">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/ab_edit_text_holo_light</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/edittext_color</item>
+        <item name="android:textColorHint">@color/edittext_hint_color</item>
+    </style>
 </resources>
