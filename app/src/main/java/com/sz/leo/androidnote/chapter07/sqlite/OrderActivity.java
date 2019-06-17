@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.sz.leo.androidnote.R;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author：leo
@@ -29,7 +30,7 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     private List<Order> mOrderList;
     private TextView showSQLMsg;
     private EditText etInputSQL;
-
+    private AtomicInteger mAtomicInteger = new AtomicInteger();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
