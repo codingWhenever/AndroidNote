@@ -1,7 +1,5 @@
 package com.sz.leo.androidnote.chapter08.sync;
 
-import android.widget.CompoundButton;
-
 /**
  * @author：leo
  * @date：2019/6/17
