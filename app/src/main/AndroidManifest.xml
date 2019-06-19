@@ -13,13 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".chapter07.sqlite.OrderActivity">
+        <activity android:name=".chapter09.retrofit.MovieHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".chapter07.sqlite.OrderActivity" />
         <activity
             android:name=".chapter01.ActivitySingleTop"
             android:launchMode="singleTop" />
@@ -45,6 +46,7 @@
         <activity android:name=".chapter04.recyclerView.GridRecyclerViewActivity" />
         <activity android:name=".chapter04.customView.FailingBallActivity" />
         <!--<activity android:name=".chapter06.photoWall.PhotoWallActivity" />-->
+        <activity android:name=".chapter09.retrofit.MovieActivity" />
     </application>
 
 </manifest>

@@ -13,4 +13,7 @@
     <string name="strErrorSql">执行出错，请检查SQL语句</string>
     <string name="strSuccessSql">执行SQL语句成功</string>
     <string name="strUnableSql">Sorry，还没处理select语句</string>
+
+    <string name="movie_list">电影列表</string>
+    <string name="award_list">福利列表</string>
 </resources>
