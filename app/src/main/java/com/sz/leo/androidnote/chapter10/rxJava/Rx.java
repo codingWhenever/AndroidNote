@@ -1,5 +1,6 @@
 package com.sz.leo.androidnote.chapter10.rxJava;
 
+import android.graphics.Paint;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -9,12 +10,16 @@ import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
+import javax.security.auth.PrivateCredentialPermission;
+
+import io.reactivex.Notification;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiConsumer;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -525,6 +530,259 @@ public class Rx {
                     @Override
                     public void onNext(Observable<Integer> integerObservable) {
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 可以将多个观察者组合在一起，然后按照之前发送顺序发送事件。
+     * 需要注意的是，concat() 最多只可以发送4个事件
+     * <p>
+     * concatArray() 与 concat() 作用一样，不过 concatArray() 可以发送多于 4 个被观察者。
+     */
+    private static void concat() {
+        Observable.concat(Observable.just(1, 2),
+                Observable.just(3, 4),
+                Observable.just(5, 6),
+                Observable.just(7, 8))
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.d(TAG, "================onNext " + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 这个方法月 concat() 作用基本一样，知识 concat() 是串行发送事件，而 merge() 并行发送事件
+     */
+    private static void merge() {
+        Observable.merge(Observable.interval(1, TimeUnit.SECONDS)
+                        .map(new Function<Long, String>() {
+                            @Override
+                            public String apply(Long aLong) throws Exception {
+                                return null;
+                            }
+                        }),
+                Observable.interval(1, TimeUnit.SECONDS).map(
+                        new Function<Long, String>() {
+                            @Override
+                            public String apply(Long aLong) throws Exception {
+                                return null;
+                            }
+                        }
+                )).subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.d(TAG, "=====================onNext " + s);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    /**
+     * 会将多个被观察者合并，根据各个被观察者发送事件的顺序一个个结合起来，
+     * 最终发送的事件数量会与源 Observable 中最少事件的数量一样。
+     * 因为事件少的Observable已经发送了onComplete事件，所以其他不会再继续发送事件
+     */
+    private static void zip() {
+        Observable.zip(Observable.intervalRange(1, 5, 1, 1, TimeUnit.SECONDS)
+                        .map(new Function<Long, String>() {
+                            @Override
+                            public String apply(Long aLong) throws Exception {
+                                String s1 = "A" + aLong;
+                                Log.d(TAG, "===================A 发送的事件 " + s1);
+                                return s1;
+                            }
+                        }),
+                Observable.intervalRange(1, 6, 1, 1, TimeUnit.SECONDS)
+                        .map(new Function<Long, String>() {
+                            @Override
+                            public String apply(Long aLong) throws Exception {
+                                String s2 = "B" + aLong;
+                                Log.d(TAG, "===================B 发送的事件 " + s2);
+                                return s2;
+                            }
+                        }),
+                new BiFunction<String, String, String>() {
+                    @Override
+                    public String apply(String s, String s2) throws Exception {
+                        return null;
+                    }
+                })
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 将数据收集到数据结构当中
+     */
+    private static void collect() {
+        Observable.just(1, 2, 3, 4)
+                .collect(new Callable<ArrayList<Integer>>() {
+                    @Override
+                    public ArrayList<Integer> call() throws Exception {
+                        return new ArrayList<>();
+                    }
+                }, new BiConsumer<ArrayList<Integer>, Integer>() {
+                    @Override
+                    public void accept(ArrayList<Integer> integers, Integer integer) throws Exception {
+                        integers.add(integer);
+                    }
+                })
+                .subscribe(new Consumer<ArrayList<Integer>>() {
+                    @Override
+                    public void accept(ArrayList<Integer> integers) throws Exception {
+                        Log.d(TAG, "===============accept " + integers);
+                    }
+                });
+    }
+
+    /**
+     * 在发送事件之前追加事件，startWith() 追加一个事件，startWithArray() 可以追加多个事件。追加的事件会先发出
+     */
+    private static void startWith() {
+        Observable.just(5, 6, 7)
+                .startWithArray(2, 3, 4)
+                .startWith(1)
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.d(TAG, "================accept " + integer);
+                    }
+                });
+
+    }
+
+    /**
+     * 延迟一段事件发送事件
+     */
+    private static void delay() {
+        Observable.just(1, 2, 3, 4)
+                .delay(2, TimeUnit.SECONDS)
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 返回被观察者发送事件的数量
+     */
+    private static void count() {
+        Observable.just(1, 2, 3)
+                .count().subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+
+            }
+        });
+    }
+
+    /**
+     * Observable 每发送一件事件之前都会先回调这个方法
+     */
+    private static void doOnEach() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) {
+                e.onNext(1);
+                e.onNext(2);
+                e.onNext(3);
+                //      e.onError(new NumberFormatException());
+                e.onComplete();
+
+            }
+        }).doOnEach(new Consumer<Notification<Integer>>() {
+            @Override
+            public void accept(Notification<Integer> integerNotification) throws Exception {
+                Log.d(TAG, "==================doOnEach " + integerNotification.getValue());
+            }
+        })
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.d(TAG, "==================onNext " + integer);
                     }
 
                     @Override
