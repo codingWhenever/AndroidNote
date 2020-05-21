@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sz.leo.androidnote">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <application
         android:name=".XApplication"
         android:allowBackup="true"
@@ -13,8 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<activity android:name=".chapter11.annotations.TestAnnotationActivity"></activity>-->
-        <activity android:name=".chapter11.annotations.TestAnnotationActivity">
+<!--        <activity android:name=".chapter03.CustomTitleActivity"></activity>-->
+        <!-- <activity android:name=".chapter11.annotations.TestAnnotationActivity"></activity> -->
+        <activity android:name=".chapter03.CustomTitleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,5 +43,8 @@
         <activity android:name=".chapter04.customView.FailingBallActivity" /> <!-- <activity android:name=".chapter06.photoWall.PhotoWallActivity" /> -->
         <activity android:name=".chapter09.retrofit.MovieActivity" />
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
